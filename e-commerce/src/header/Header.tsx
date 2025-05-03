@@ -52,7 +52,7 @@ const StyledHeader = styled.header`
     justify-content: space-between;
     align-items: center;
     color: #fff;
-    width: 100vw;
+    width: 100%;
     padding: 9px
 `;
 const Nav = styled.nav`

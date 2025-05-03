@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import sparkle from "../../assets/Vector.svg"
 const Section1: React.FC = () => {
     return (
         <Section1Container>
@@ -17,12 +17,16 @@ const Section1: React.FC = () => {
                     <StatNumber>2,000+</StatNumber>
                     <StatText>High-Quality Products</StatText>
                 </Stat>
-
-                <Stat center>
+                <Stat>
                     <StatNumber>30000+</StatNumber>
                     <StatText >Happy Customers</StatText>
                 </Stat>
             </Section1Stats>
+            <ImageContainer>
+                <Sparkle1 src={sparkle} />
+                {/* <Section1Img src={image} /> */}
+                <Sparkle2 src={sparkle} />
+            </ImageContainer>
         </Section1Container>
     );
 };
@@ -32,6 +36,10 @@ export default Section1;
 const Section1Container = styled.section`
 background-color: #F2F0F1;
 padding: 9px;
+display: flex;
+flex-direction: column;
+gap: 20px;
+
 `
 const Section1Title = styled.h1`
 font-family: FONTSPRING DEMO - Integral CF Bold;
@@ -73,25 +81,30 @@ transition: background-color 0.3s;
 `
 const Section1Stats = styled.div`
   display: grid;
-  grid-template-columns: auto 1px auto
-  grid-template-rows: auto auto;
-  gap: 16px;
-  justify-content: center;
-  align-items: center;
-  max-width: fit-content;
-  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "stat1 stat2 stat3"
+    ".     stat4  .";
+   row-gap: 20px;
+  justify-items: center;
+  text-align: center;
+  width: fit-content;
+  align-self: center;
 `;
 
 
 
-const Stat = styled.div<{ center?: boolean }>`
-  ${({ center }) =>
-    center &&
-    `
-    grid-column: 1 / -1; /* Span entire row */
-    justify-self: center;
-    margin-top: 16px;
-  `}
+const Stat = styled.div`
+    &:nth-of-type(1) {
+    grid-area: stat1;
+  }
+    &:nth-of-type(3) {
+   grid-area: stat3;
+  }
+      &:nth-of-type(4) {
+   grid-area: stat4;
+  }
+  
 `;
 const StatNumber = styled.h3`
 font-weight: 700;
@@ -109,4 +122,40 @@ letter-spacing: 0%;
 const Line = styled.div`
 width: 1px;
 height: 50px;
+grid-area: stat2;
 background-color: rgba(0, 0, 0, 0.1)`
+
+const Sparkle1 = styled.img`
+width: 44px;
+height: 44px;
+position: absolute;
+  top: 20%;
+    left: 10%;
+`;
+
+
+const Sparkle2 = styled.img`
+width: 76px;
+height: 76px;
+position: absolute;
+    z-index: 2;
+ top: 0;
+right: 0%;
+`;
+
+
+const ImageContainer = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/b26fea69ccfd8aa5825862cdb9604a4fb4930464.jpg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 448px;
+    max-width: 375px;
+`;
+
+
